@@ -14,6 +14,22 @@
         <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
         
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router"></script>
+
+        <style>
+            .cursor{cursor:pointer;}
+            .txt_center{text-align: center;}
+            .addr {
+                font-family: "Source Sans Pro", Helvetica, sans-serif;
+                font-weight: 900;
+                line-height: 1.5;
+                font-size: 1rem;
+                margin: 0 0 1.5rem 0;
+                color: #212931;
+                letter-spacing: 0.075em;
+                text-transform: uppercase;
+            }
+        </style>
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
@@ -27,90 +43,60 @@
             <!-- Nav -->
                 <nav id="nav">
                     <ul class="links">
-                        <li><a href="index.html">This is Massively</a></li>
-                        <li class="active"><a href="generic.html">Generic Page</a></li>
-                        <li><a href="elements.html">Elements Reference</a></li>
+                        <li v-bind:class="mode == 'ABOUT'?'active':''"><a v-on:click="mode = 'ABOUT'" class="cursor">about</a></li>
+                        <li v-bind:class="mode == 'MENU'?'active':''"><a v-on:click="mode = 'MENU'" class="cursor">menu</a></li>
                     </ul>
                     <ul class="icons">
-                        <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-                        <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-                        <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-                        <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+                        <!-- <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li> -->
+                        <!-- <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li> -->
+                        <li><a href="https://www.instagram.com/coolship_korea/?hl=ko" class="icon fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
+                        <!-- <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li> -->
                     </ul>
                 </nav>
 
             <!-- Main -->
                 <div id="main">
+                    <!-- ABOUT -->
+                    <section v-if="mode == 'ABOUT'" class="post">
+                        <header class="major">
+                            <h1 style="color:#e9ecef;">Coolship</h1>
+                            <p style="color:#ced4da;">
+                                Coolship is a bar handles carefully selected craft beer, wine, sake in Korea.<br/> 
+                                Specilaized in Lambic/Geuze from 3 Fonteinen, De Cam and Hanssens.<br/> 
+                                Dm us&nbsp;&nbsp;<a href="https://www.instagram.com/coolship_korea/?hl=ko" class="icon fa-instagram" target="_blank" style="color:#ced4da;"><span class="label">Instagram</span></a>
+                            </p>
+                        </header>
+                        <div class="image main txt_center">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d790.8209838925476!2d127.01940052921158!3d37.54837369873757!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca373186e1bad%3A0x22be2b473f9a6be!2z7ISc7Jq47Yq567OE7IucIOyEseuPmeq1rCDquIjtmLjrj5kz6rCAIOyepe2EsOq4uCAzNS0x!5e0!3m2!1sko!2skr!4v1548157081807" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>                        
+                        <p class="txt_center" style="color:#ced4da;"><span class="addr" style="color:#ced4da;">Address : </span>35-1, Jangteo-gil, Seongdong-gu, Seoul</p>
 
-                    <!-- Post -->
-                        <section class="post">
-                            <header class="major">
-                                <span class="date">April 25, 2017</span>
-                                <h1>This is a<br />
-                                Generic Page</h1>
-                                <p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
-                                facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
-                                amet nullam sed etiam veroeros.</p>
-                            </header>
-                            <div class="image main"><img src="images/pic01.jpg" alt="" /></div>
-                            <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur sapien risus, commodo eget turpis at, elementum convallis enim turpis, lorem ipsum dolor sit amet nullam.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus. Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum.</p>
-                        </section>
-
+                        
+                    </section>
+                    <!-- MENU -->
+                    <section v-if="mode == 'MENU'" class="post">
+                        <header class="major">
+                            <span class="date">Lambic</span>
+                            <h1>This is a<br />
+                            Generic Page</h1>
+                            <p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
+                            facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
+                            amet nullam sed etiam veroeros.</p>
+                        </header>
+                        <div class="image main"><img src="images/pic01.jpg" alt="" /></div>
+                        <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur sapien risus, commodo eget turpis at, elementum convallis enim turpis, lorem ipsum dolor sit amet nullam.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus. Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum.</p>
+                    </section>
                 </div>
 
             <!-- Footer -->
                 <footer id="footer">
-                    <section>
-                        <form method="post" action="#">
-                            <div class="fields">
-                                <div class="field">
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" id="name" />
-                                </div>
-                                <div class="field">
-                                    <label for="email">Email</label>
-                                    <input type="text" name="email" id="email" />
-                                </div>
-                                <div class="field">
-                                    <label for="message">Message</label>
-                                    <textarea name="message" id="message" rows="3"></textarea>
-                                </div>
-                            </div>
-                            <ul class="actions">
-                                <li><input type="submit" value="Send Message" /></li>
-                            </ul>
-                        </form>
-                    </section>
-                    <section class="split contact">
-                        <section class="alt">
-                            <h3>Address</h3>
-                            <p>1234 Somewhere Road #87257<br />
-                            Nashville, TN 00000-0000</p>
-                        </section>
-                        <section>
-                            <h3>Phone</h3>
-                            <p><a href="#">(000) 000-0000</a></p>
-                        </section>
-                        <section>
-                            <h3>Email</h3>
-                            <p><a href="#">info@untitled.tld</a></p>
-                        </section>
-                        <section>
-                            <h3>Social</h3>
-                            <ul class="icons alt">
-                                <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
-                                <li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
-                                <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
-                                <li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
-                            </ul>
-                        </section>
-                    </section>
+                    
                 </footer>
 
             <!-- Copyright -->
             <div id="copyright">
-                <ul><li>&copy; Coolship</li><li>Design: <a href="https://trpgms.github.io">trpgms</a></li></ul>
+                <ul><li>&copy; Coolship</li><li>since 2019</li></ul>
             </div>
 
         </div>
@@ -125,10 +111,18 @@
         <script src="assets/js/main.js"></script>
 
         <script>
-            const app = new Vue({
+            const router = new VueRouter({mode: 'history',routes: []});
+            const app = new Vue({router,
                 el: '#wrapper',
                 data: {
+                    mode:'ABOUT' // MENU
+                },
+                method:{
+                    
                 }
+            });
+            app.$nextTick(function() {
+    	        app.mode = app.$route.query.mode == null ? 'ABOUT': app.$route.query.mode;
             });
         </script>
 	</body>

@@ -144,7 +144,7 @@ input, select, textarea {
 		}
 
 	body {
-		color: #212931;
+		color: #ced4da;
 	}
 
 	body, input, select, textarea {
@@ -292,7 +292,7 @@ input, select, textarea {
 	}
 
 	a {
-		color: #212931;
+		color: #e9ecef;
 		border-bottom-color: rgba(33, 41, 49, 0.5);
 	}
 
@@ -306,7 +306,7 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #212931;
+		color: #e9ecef;
 	}
 
 	blockquote {
@@ -3729,7 +3729,7 @@ input, select, textarea {
 /* Main */
 
 	#main {
-		background-color: #ffffff;
+		background-color: transparent;
 		position: relative;
 		margin: 0 auto;
 		width: calc(100% - 4rem);
