@@ -4530,7 +4530,7 @@ input, select, textarea {
 		transition: transform 0.5s ease, box-shadow 0.5s ease, visibility 0.5s;
 		display: none;
 		-webkit-overflow-scrolling: touch;
-		background: #ffffff;
+		background: #868e96;
 		box-shadow: none;
 		color: #212931;
 		height: 100%;
