@@ -29,6 +29,30 @@
                 letter-spacing: 0.075em;
                 text-transform: uppercase;
             }
+            .cards {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0;
+                padding: 0;
+            }
+
+            .card {
+                margin: 0 auto;
+                display: flex;
+                padding: 1rem;
+                flex-direction: column;                
+            }
+            @media(min-width: 40rem) {
+                .card {
+                    width: 50%;
+                }
+            }
+            @media(min-width: 56rem) {
+                .card {
+                    width: 33%;
+                }
+            }
+
         </style>
 	</head>
 	<body class="is-preload">
@@ -61,32 +85,40 @@
                         <header class="major">
                             <span class="date">2019-01-25</span>
                         </header>
-                        <h3>Hanssens Artisanaal bvba</h3>
-                        <ul>
-                            <li>Oude gueuze 750ml</li>
-                            <li class="soldout">Oude gueuze 375ml</li>
-                            <li>Oude Kriek 750ml</li>
-                            <li class="soldout">Oude Kriek 375ml</li>
-                            <li class="soldout">Schaarbeekse Kriek 750ml</li>
-                            <li class="soldout">Schaarbeekse Kriek 375ml</li>
-                            <li>Oudbeitje 375ml</li>
-                            <li>Framboos 375ml</li>
-                            <li>Casssis 375ml</li>
-                            <li>Megablend2017 750ml</li>
-                        </ul>
-                        <h3>De Cam Geuzestekerij</h3>
-                        <ul>
-                            <li>Oude Gueuze 750ml</li>
-                            <li>Oude Lambiek 750ml</li>
-                            <li>Oude Kriek 750ml</li>
-                            <li>Framboise Lambiek 750ml</li>
-                            <li>Tros Bessen 750ml</li>
-                            <li>Wilde Bosbessen 750ml</li>
-                        </ul>
-                        <h3>Brouwerij 3 Fonteinen</h3>
-                        <ul>
-                            <li>Oude Kriek 375ml</li>
-                        </ul>
+                        <div class="cards">
+                            <section class="card">
+                                <h3>Hanssens Artisanaal bvba</h3>
+                                <ul style="padding-left: 2em;">
+                                    <li>Oude gueuze 750ml</li>
+                                    <li class="soldout">Oude gueuze 375ml</li>
+                                    <li>Oude Kriek 750ml</li>
+                                    <li class="soldout">Oude Kriek 375ml</li>
+                                    <li class="soldout">Schaarbeekse Kriek 750ml</li>
+                                    <li class="soldout">Schaarbeekse Kriek 375ml</li>
+                                    <li>Oudbeitje 375ml</li>
+                                    <li>Framboos 375ml</li>
+                                    <li>Casssis 375ml</li>
+                                    <li>Megablend2017 750ml</li>
+                                </ul>
+                            </section>
+                            <section class="card">
+                                <h3>De Cam Geuzestekerij</h3>
+                                <ul style="padding-left: 2em;">
+                                    <li>Oude Gueuze 750ml</li>
+                                    <li>Oude Lambiek 750ml</li>
+                                    <li>Oude Kriek 750ml</li>
+                                    <li>Framboise Lambiek 750ml</li>
+                                    <li>Tros Bessen 750ml</li>
+                                    <li>Wilde Bosbessen 750ml</li>
+                                </ul>
+                            </section>
+                            <section class="card">
+                                <h3>Brouwerij 3 Fonteinen</h3>
+                                <ul style="padding-left: 2em;">
+                                    <li>Oude Kriek 375ml</li>
+                                </ul>
+                            </section>
+                        </div>
                     </section>
                 </div>
 
