@@ -4,9 +4,9 @@
 @font-face {
 	font-family: 'CaslonCP';
 	src: 
-		url('/assets/fonts/CaslonCP.eot') format('embedded-opentype'),
-		url('/assets/fonts/CaslonCP.woff') format('woff'),
-		url('/assets/fonts/CaslonCP.ttf') format('truetype');
+		url('../fonts/CaslonCP.eot') format('embedded-opentype'),
+		url('../fonts/CaslonCP.woff') format('woff'),
+		url('../fonts/CaslonCP.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
