@@ -6,6 +6,7 @@
             ,"breweries": [
                 {
                     "name":"Brouwerij 3 Fonteinen"
+                    ,"cans":[]
                     ,"bottles":[
                         {
                             "name":"Oude Kriek"
@@ -41,6 +42,7 @@
                     ]
                 },{
                     "name":"De Cam Geuzestekerij"
+                    ,"cans":[]
                     ,"bottles":[
                     {
                         "name":"Oude Geuze"
@@ -75,6 +77,7 @@
                     }]
                 },{
                     "name":"Hanssens Artisanaal bvba"
+                    ,"cans":[]
                     ,"bottles":[
                         {
                             "name":"Oude Gueuze"
@@ -130,6 +133,7 @@
                     ]
                 },{
                     "name":"Gueuzerie Tilquin"
+                    ,"cans":[]
                     ,"bottles":[
                         {
                             "name":"Oude Gueuze Tilquin à L'Ancienne"
@@ -145,6 +149,7 @@
                     ]
                 },{
                     "name":"Oud Beersel"
+                    ,"cans":[]
                     ,"bottles":[
                         {
                             "name":"Lambiek"
@@ -168,6 +173,241 @@
                             ,"status":""
                         }
                     ]
+                }
+            ]
+        },{
+            "name":"Flanders Red Ale"
+            ,"breweries":[
+                {
+                    "name":"Rodenbach"
+                    ,"cans":[]
+                    ,"bottles":[
+                        {
+                            "name":"Alexander"
+                            ,"size":"375ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":"Grand Cru"
+                            ,"size":"375ml"
+                            ,"comment":""
+                            ,"status":""
+                        }
+                    ]
+                }
+            ]
+        },{
+            "name":"Wild Ale"
+            ,"breweries":[
+                {
+                    "name":"Bruery Terreux"
+                    ,"cans":[]
+                    ,"bottles":[
+                        {
+                            "name":"The Wanderer"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":"Beauregarde"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":"Peach Sour Blonde"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":"Rueuze"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        }
+                    ]
+                }
+            ]
+        },{
+            "name":"Wine (natural)"
+            ,"breweries":[
+                {
+                    "name":"La Stoppa (Emilia-Romagna)"
+                    ,"cans":[]
+                    ,"bottles":[
+                        {
+                            "name":"Emilia I.G.T. Ageno (2014)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":"Emilia Rosso Barbera della Stoppa (2006)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":"Emilia Rosso Trebbiolo (2016)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":"Emilia Rosso Macchiona (2002)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":"Emilia Rosso Macchiona (2006)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":"soldout"
+                        },{
+                            "name":"Emilia Rosso Macchiona (2011)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        }
+                    ]
+                },{
+                    "name":"Vallone di Cecione (Toscana,Chianti)"
+                    ,"cans":[]
+                    ,"bottles":[
+                        {
+                            "name":"Chianti Classico (2013)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":"Toscana Rosso Malvasia Nera (2107)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        }
+                    ]
+                },{
+                    "name":"Cosimo Maria Masini (Toscana,Pisa)"
+                    ,"cans":[]
+                    ,"bottles":[
+                        {
+                            "name":"Toscana Rosso Sincero(2015)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":"Toscana I.G.T. Sincero (2017)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":"soldout"
+                        },{
+                            "name":"Toscana I.G.T. Nicole (2016)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        }
+                    ]
+                },{
+                    "name":"Kante (Friuli Venezia Giulia)"
+                    ,"cans":[]
+                    ,"bottles":[
+                        {
+                            "name":"Carso Malvasia (2013)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":""
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        }
+                    ]
+                },{
+                    "name":"Tabarrini (Umbria)"
+                    ,"cans":[]
+                    ,"bottles":[
+                        {
+                            "name":"Umbria Bianco Adarmando (2014)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":"Montefalco Rosso Boccatone (2014)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        }
+                    ]
+                },{
+                    "name":"Arianna Occhipinti (Sicilia)"
+                    ,"cans":[]
+                    ,"bottles":[
+                        {
+                            "name":"Terre Siciliane Grotte Alte (2013)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":"Terre Siciliane Il Frappato (2015)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        },{
+                            "name":"Terre Siciliane Nero d'Avola Siccagno (2015)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        }
+                    ]
+                },{
+                    "name":"COS (Sicilia)"
+                    ,"cans":[]
+                    ,"bottles":[
+                        {
+                            "name":"Vittoria Pithos Rosso (2016)"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
+                        }
+                    ]
+                }
+            ]
+        },{
+            "name":"Beer"
+            ,"breweries":[
+                {
+                    "name":"Firestone Walker"
+                    ,"cans":[{
+                        "name":"Lager"
+                        ,"size":"350ml"
+                        ,"comment":""
+                        ,"status":""
+                    }]
+                    ,"bottles":[]
+                },{
+                    "name":"Oskar Blues"
+                    ,"cans":[{
+                        "name":"Ten FIDY - BBA"
+                        ,"size":"500ml"
+                        ,"comment":""
+                        ,"status":""
+                    }]
+                    ,"bottles":[]
+                },{
+                    "name":"Perrin Brewing"
+                    ,"cans":[{
+                        "name":"Perrin Black Ale"
+                        ,"size":"350ml"
+                        ,"comment":""
+                        ,"status":""
+                    }]
+                    ,"bottles":[]
+                },{
+                    "name":"SCB"
+                    ,"cans":[{
+                        "name":"Hop Rising DIPA"
+                        ,"size":"350ml"
+                        ,"comment":""
+                        ,"status":""
+                    }]
+                    ,"bottles":[]
                 }
             ]
         }
