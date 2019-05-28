@@ -29,6 +29,11 @@
         <link rel="stylesheet" href="assets/css/main.css" />
         <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+        <script src="https://unpkg.com/vue"></script>
+
         <style>
             .cursor{cursor:pointer;}
             .soldout{text-decoration: line-through;}
@@ -53,22 +58,28 @@
                 display: block;
                 width: 100%;
             }
-						.card ul {
-							list-style: none;
-							margin:0;
-							padding:0;
-						}
-						.card ul li {
-							margin:0;
-							padding:0;
-						}
-						.card i {
-							margin:0 1em;
-						}
-						.txtright {
-							text-align: right;
-							margin:0;
-						}
+            .card ul {
+                list-style: none;
+                margin:0;
+                padding:0;
+            }
+            .card ul li {
+                margin:0;
+                padding:0;
+            }
+            .card i {
+                margin:0 1em;
+            }
+            .txtright {
+                text-align: right;
+                margin:0;
+            }
+            .more {
+                cursor:pointer;
+            }
+            .more i {
+                margin:0 5px 0 0;
+            }
             @media(min-width: 40rem) {
                 .card {
                     width: 70%;
@@ -126,150 +137,18 @@
                     <section id="menu" class="post">
                         <header class="major">
                             <h1 style="color:#e9ecef;">Menu</h1>
-                            <span class="date">Updated:2019-02-08</span>
+                            <span class="date">{{menu.updated}}</span>
                         </header>
-                        <div class="cards">
-                            <h2>Lambic</h2>
-                            <section class="card">
-                                <h3>Brouwerij 3 Fonteinen</h3>
-                                <ul>
-                                    <li>Oude Kriek  <p class="txtright">no. 8 seizoen 17/18<i class="fas fa-wine-bottle"></i>375ml</p></li>
-                                    <li>Oude Geuze  <p class="txtright">no. 10 seizoen 17/18<i class="fas fa-wine-bottle"></i>375ml</p></li>
-                                    <li>Framboos oogst 2017  <p class="txtright">no. 16 seizoen 17/18<i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Cuvée Armand & Gaston  <p class="txtright">no. 19 seizoen 17/18<i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Cuvée Armand & Gaston  <p class="txtright">no. 23 seizoen 17/18<i class="fas fa-wine-bottle"></i>375ml</p></li>
+                        <div class="cards" v-for="item in menu.types">
+                            <h2>{{item.name}}</h2>
+                            <section class="card" v-for="brewery in item.breweries">
+                                <h3><a class="more" v-on:click="fn_toggle(brewery)"><i class="fa" v-bind:class="brewery.isOpen?'fa-angle-down':'fa-angle-right'"></i>{{brewery.name}}</a></h3>
+                                <ul v-show="brewery.isOpen">
+                                    <li v-for="bottle in brewery.bottles" v-bind:class="bottle.status">{{bottle.name}}  <p class="txtright">{{bottle.comment}}<i class="fas fa-wine-bottle"></i>{{bottle.size}}</p></li>
+                                    <li v-for="can in brewery.cans" v-bind:class="can.status">{{can.name}}  <p class="txtright">{{can.comment}}<i class="fas fa-beer"></i>{{can.size}}</p></li>
                                 </ul>
                             </section>
-                            <section class="card">
-                                <h3>De Cam Geuzestekerij</h3>
-                                <ul >
-                                    <li>Oude Geuze <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Oude Lambiek  <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Oude Kriek  <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Framboise Lambiek  <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Tros Bessen  <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Wilde Bosbessen  <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                </ul>
-                            </section>
-                            <section class="card">
-                                <h3>Hanssens Artisanaal bvba</h3>
-                                <ul >
-                                    <li>Oude Gueuze  <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li class="soldout">Oude Gueuze  <p class="txtright"><i class="fas fa-wine-bottle"></i>375ml</p></li>
-                                    <li>Oude Kriek  <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li class="soldout">Oude Kriek  <p class="txtright"><i class="fas fa-wine-bottle"></i>375ml</p></li>
-                                    <li class="soldout">Schaarbeekse Kriek  <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Schaarbeekse Kriek  <p class="txtright"><i class="fas fa-wine-bottle"></i>375ml</p></li>
-                                    <li>Oudbeitje  <p class="txtright"><i class="fas fa-wine-bottle"></i>375ml</p></li>
-                                    <li>Framboos  <p class="txtright"><i class="fas fa-wine-bottle"></i>375ml</p></li>
-                                    <li>Casssis  <p class="txtright"><i class="fas fa-wine-bottle"></i>375ml</p></li>
-                                    <li>Mega Blend 2017  <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                </ul>
-                            </section>
-                            <section class="card">
-                                <h3>Gueuzerie Tilquin</h3>
-                                <ul >
-                                    <li>Oude Gueuze Tilquin à L'Ancienne <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                </ul>
-                            </section>
-                            <section class="card">
-                                <h3>Oud Beersel</h3>
-                                <ul >
-				<li>Oud Beersel Lambiek<p class="txtright"><i class="fas fa-bee"></i>200ml</p></li>
-			    	<li>Oud Beersel Krieken Lambiek<p class="txtright"><i class="fas fa-bee"></i>200ml</p></li>
-                                    
-                                    <li>Oud Beersel Oude Gueuze<p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Oud Beersel Kriek<p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                </ul>
-                            </section>
-                            <h2>Wild Ale</h2>
-                            <section class="card">
-                                <h3>Bruery Terreux</h3>
-                                <ul>
-                                    <li>The Wanderer <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Beauregarde <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Peach Sour Blonde <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Rueuze <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                </ul>
-                            </section>
-				<h2>Flanders Red Ale</h2>
-				<section class="card">
-				<h3>Rodenbach</h3>
-				 <ul >
-                                    	<li>Alexander <p class="txtright"><i class="fas fa-wine-bottle"></i>375ml</p></li>
-				 	<li>Grand Cru <p class="txtright"><i class="fas fa-wine-bottle"></i>375ml</p></li>
-                                </ul>
-			</section>
-                            <h2>Wine</h2>
-                            <section class="card">
-                                <h3>La Stoppa (Emilia-Romagna)</h3>
-                                <ul>
-                                    <li>Emilia I.G.T. Ageno (2014)  <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Emilia Rosso Barbera della Stoppa (2006)  <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Emilia Rosso Trebbiolo (2016)  <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Emilia Rosso Macchiona (2002) <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li class="soldout"> Emilia Rosso Macchiona (2006) <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Emilia Rosso Macchiona (2011) <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                </ul>
-                            </section>
-                            <section class="card">
-                                <h3>Vallone di Cecione (Toscana,Chianti)</h3>
-                                <ul>
-                                    <li>Chianti Classico (2013) <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Toscana Rosso Malvasia Nera (2107) <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                </ul>
-                            </section>
-                            <section class="card">
-                                <h3>Cosimo Maria Masini (Toscana,Pisa)</h3>
-                                <ul>
-                                    <li>Toscana Rosso Sincero(2015) <p class="txtright"><i class="fas fa-wine-bottle"></i>375ml</p></li>
-                                    <li class="soldout">Toscana I.G.T. Sincero (2017) <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Toscana I.G.T. Nicole (2016) <p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                </ul>
-                            </section>
-                            <section class="card">
-                                <h3>Kante (Friuli Venezia Giulia)</h3>
-                                <ul>
-                                    <li>Carso Malvasia (2013)<p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                </ul>
-                            </section>
-                            <section class="card">
-                                <h3>Tabarrini (Umbria)</h3>
-                                <ul>
-                                    <li>Umbria Bianco Adarmando (2014)<p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Montefalco Rosso Boccatone (2014)<p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                </ul>
-                            </section>
-                            <section class="card">
-                                <h3>Arianna Occhipinti (Sicilia)</h3>
-                                <ul>
-                                    <li>Terre Siciliane Grotte Alte (2013)<p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Terre Siciliane Il Frappato (2015)<p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                    <li>Terre Siciliane Nero d'Avola Siccagno (2015)<p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                </ul>
-                            </section>
-                            <section class="card">
-                                <h3>COS (Sicilia)</h3>
-                                <ul>
-                                    <li class="soldout">Vittoria Pithos Rosso (2016)<p class="txtright"><i class="fas fa-wine-bottle"></i>750ml</p></li>
-                                </ul>
-                            </section>
-                            <h2>Beer</h2>
-                            <section class="card">
-                                <h3>Others</h3>
-				   
-                                <ul >
-                                    <li>Firestone Walker
-<p class="txtright">Lager <i class="fas fa-beer"></i></p>
-									</li>
-                                    <li>Oskar Blues
-                                            <p class="txtright">Ten FIDY - BBA <i class="fas fa-beer"></i></p>
-                                    </li>
-                                    <li>Perrin Brewing<p class="txtright">Perrin Black Ale <i class="fas fa-beer"></i></p></li>
-                                    <li>SCB<p class="txtright">Hop Rising DIPA <i class="fas fa-beer"></i></p></li>
-                                </ul>
-                            </section>
-                        </div>
+                        </div>                        
                     </section>
                     <section id="location" class="post">
                         <header class="major">
@@ -306,5 +185,33 @@
         <script src="assets/js/breakpoints.min.js"></script>
         <script src="assets/js/util.js"></script>
         <script src="assets/js/main.js"></script>
+        <script type="text/javascript">
+            /*<![CDATA[*/
+            var app = new Vue({
+                el: '#wrapper',
+                data: {
+                    menu:{}
+                },
+                methods: {
+                    fn_toggle:function(brewery){
+                        brewery.isOpen = !brewery.isOpen;
+                        app.$forceUpdate();
+                    }
+                },
+                computed: {
+                }
+            });
+            app.$nextTick(function () {
+                axios.get('https://trpgms.github.io/menu.json').then(function (response) {
+                    app.menu = response.data;
+                    for(var t = 0 ; t < app.menu.types.length ; t++) {
+                        for(var b = 0 ; b < app.menu.types[t].breweries.length ; b++) {
+                            app.menu.types[t].breweries[b].isOpen = false;
+                        }
+                    }
+                });
+            });
+        /*]]>*/
+        </script>
 	</body>
 </html>
