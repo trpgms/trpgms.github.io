@@ -1,171 +1,171 @@
 {
-    updated:'2019-05-28'
-    ,types:[
+    "updated":"2019-05-28"
+    ,"types":[
         {
-            name:'Lambic'
-            ,breweries: [
+            "name":"Lambic"
+            ,"breweries": [
                 {
-                    name:'Brouwerij 3 Fonteinen'
-                    ,bottles:[
+                    "name":"Brouwerij 3 Fonteinen"
+                    ,"bottles":[
                         {
-                            name:'Oude Kriek'
-                            ,size:'375ml'
-                            ,comment:'no. 8 seizoen 17/18'
-                            ,status:''
+                            "name":"Oude Kriek"
+                            ,"size":"375ml"
+                            ,"comment":"no. 8 seizoen 17/18"
+                            ,"status":""
                         },{
-                            name:'Oude Geuze'
-                            ,size:'375ml'
-                            ,comment:'no. 10 seizoen 17/18'
-                            ,status:''
+                            "name":"Oude Geuze"
+                            ,"size":"375ml"
+                            ,"comment":"no. 10 seizoen 17/18"
+                            ,"status":""
                         },{
-                            name:'Framboos oogst 2017'
-                            ,size:'375ml'
-                            ,comment:'no. 16 seizoen 17/18'
-                            ,status:''
+                            "name":"Framboos oogst 2017"
+                            ,"size":"375ml"
+                            ,"comment":"no. 16 seizoen 17/18"
+                            ,"status":""
                         },{
-                            name:'Cuvée Armand & Gaston'
-                            ,size:'375ml'
-                            ,comment:'no. 23 seizoen 17/18'
-                            ,status:''
+                            "name":"Cuvée Armand & Gaston"
+                            ,"size":"375ml"
+                            ,"comment":"no. 23 seizoen 17/18"
+                            ,"status":""
                         },{
-                            name:'Cuvée Armand & Gaston'
-                            ,size:'750ml'
-                            ,comment:'no. 19 seizoen 17/18'
-                            ,status:''
+                            "name":"Cuvée Armand & Gaston"
+                            ,"size":"750ml"
+                            ,"comment":"no. 19 seizoen 17/18"
+                            ,"status":""
                         },{
-                            name:'Cuvée Armand & Gaston'
-                            ,size:'750ml'
-                            ,comment:'no. 22 seizoen 17/18'
-                            ,status:'soldout'
+                            "name":"Cuvée Armand & Gaston"
+                            ,"size":"750ml"
+                            ,"comment":"no. 22 seizoen 17/18"
+                            ,"status":"soldout"
                         }
                     ]
                 },{
-                    name:'De Cam Geuzestekerij'
-                    ,bottles:[
+                    "name":"De Cam Geuzestekerij"
+                    ,"bottles":[
                     {
-                        name:'Oude Geuze'
-                        ,size:'750ml'
-                        ,comment:''
-                        ,status:''
+                        "name":"Oude Geuze"
+                        ,"size":"750ml"
+                        ,"comment":""
+                        ,"status":""
                     },{
-                        name:'Oude Lambiek'
-                        ,size:'750ml'
-                        ,comment:''
-                        ,status:''
+                        "name":"Oude Lambiek"
+                        ,"size":"750ml"
+                        ,"comment":""
+                        ,"status":""
                     },{
-                        name:'Oude Kriek'
-                        ,size:'750ml'
-                        ,comment:''
-                        ,status:''
+                        "name":"Oude Kriek"
+                        ,"size":"750ml"
+                        ,"comment":""
+                        ,"status":""
                     },{
-                        name:'Framboise Lambiek'
-                        ,size:'750ml'
-                        ,comment:''
-                        ,status:''
+                        "name":"Framboise Lambiek"
+                        ,"size":"750ml"
+                        ,"comment":""
+                        ,"status":""
                     },{
-                        name:'Tros Bessen'
-                        ,size:'750ml'
-                        ,comment:''
-                        ,status:''
+                        "name":"Tros Bessen"
+                        ,"size":"750ml"
+                        ,"comment":""
+                        ,"status":""
                     },{
-                        name:'Wilde Bosbessen'
-                        ,size:'750ml'
-                        ,comment:''
-                        ,status:''
+                        "name":"Wilde Bosbessen"
+                        ,"size":"750ml"
+                        ,"comment":""
+                        ,"status":""
                     }]
                 },{
-                    name:'Hanssens Artisanaal bvba'
-                    ,bottles:[
+                    "name":"Hanssens Artisanaal bvba"
+                    ,"bottles":[
                         {
-                            name:'Oude Gueuze'
-                            ,size:'750ml'
-                            ,comment:''
-                            ,status:''
+                            "name":"Oude Gueuze"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
                         },{
-                            name:'Oude Gueuze'
-                            ,size:'375ml'
-                            ,comment:''
-                            ,status:'soldout'
+                            "name":"Oude Gueuze"
+                            ,"size":"375ml"
+                            ,"comment":""
+                            ,"status":"soldout"
                         },{
-                            name:'Oude Kriek'
-                            ,size:'750ml'
-                            ,comment:''
-                            ,status:''
+                            "name":"Oude Kriek"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
                         },{
-                            name:'Oude Kriek'
-                            ,size:'375ml'
-                            ,comment:''
-                            ,status:'soldout'
+                            "name":"Oude Kriek"
+                            ,"size":"375ml"
+                            ,"comment":""
+                            ,"status":"soldout"
                         },{
-                            name:'Schaarbeekse Kriek'
-                            ,size:'750ml'
-                            ,comment:''
-                            ,status:'soldout'
+                            "name":"Schaarbeekse Kriek"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":"soldout"
                         },{
-                            name:'Schaarbeekse Kriek'
-                            ,size:'375ml'
-                            ,comment:''
-                            ,status:'soldout'
+                            "name":"Schaarbeekse Kriek"
+                            ,"size":"375ml"
+                            ,"comment":""
+                            ,"status":"soldout"
                         },{
-                            name:'Oudbeitje'
-                            ,size:'375ml'
-                            ,comment:''
-                            ,status:''
+                            "name":"Oudbeitje"
+                            ,"size":"375ml"
+                            ,"comment":""
+                            ,"status":""
                         },{
-                            name:'Framboos'
-                            ,size:'375ml'
-                            ,comment:''
-                            ,status:''
+                            "name":"Framboos"
+                            ,"size":"375ml"
+                            ,"comment":""
+                            ,"status":""
                         },{
-                            name:'Casssis'
-                            ,size:'375ml'
-                            ,comment:''
-                            ,status:''
+                            "name":"Casssis"
+                            ,"size":"375ml"
+                            ,"comment":""
+                            ,"status":""
                         },{
-                            name:'Mega Blend 2017'
-                            ,size:'750ml'
-                            ,comment:''
-                            ,status:''
+                            "name":"Mega Blend 2017"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
                         }
                     ]
                 },{
-                    name:'Gueuzerie Tilquin'
-                    ,bottles:[
+                    "name":"Gueuzerie Tilquin"
+                    ,"bottles":[
                         {
-                            name:'Oude Gueuze Tilquin à L'Ancienne'
-                            ,size:'750ml'
-                            ,comment:''
-                            ,status:''
+                            "name":"Oude Gueuze Tilquin à L'Ancienne"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
                         },{
-                            name:'Oude Geuze'
-                            ,size:'750ml'
-                            ,comment:''
-                            ,status:''
+                            "name":"Oude Geuze"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
                         }
                     ]
                 },{
-                    name:'Oud Beersel'
-                    ,bottles:[
+                    "name":"Oud Beersel"
+                    ,"bottles":[
                         {
-                            name:'Lambiek'
-                            ,size:'150ml'
-                            ,comment:'draft lambiek'
-                            ,status:''
+                            "name":"Lambiek"
+                            ,"size":"150ml"
+                            ,"comment":"draft lambiek"
+                            ,"status":""
                         },{
-                            name:'Krieken Lambiek'
-                            ,size:'150ml'
-                            ,comment:'draft lambiek'
-                            ,status:''
+                            "name":"Krieken Lambiek"
+                            ,"size":"150ml"
+                            ,"comment":"draft lambiek"
+                            ,"status":""
                         },{
-                            name:'Oude Gueuze'
-                            ,size:'750ml'
-                            ,comment:''
-                            ,status:''
+                            "name":"Oude Gueuze"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
                         },{
-                            name:'Kriek'
-                            ,size:'750ml'
-                            ,comment:''
-                            ,status:''
+                            "name":"Kriek"
+                            ,"size":"750ml"
+                            ,"comment":""
+                            ,"status":""
                         }
                     ]
                 }
