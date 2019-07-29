@@ -82,52 +82,52 @@
                         {
                             "name":"Oude Gueuze"
                             ,"size":"750ml"
-                            ,"comment":""
+                            ,"comment":"2017 / 2018"
+                            ,"status":""
+                        },{
+                            "name":"Oude Kriek"
+                            ,"size":"750ml"
+                            ,"comment":"2017 / 2018"
+                            ,"status":""
+                        },{
+                            "name":"Schaarbeekse Kriek"
+                            ,"size":"750ml"
+                            ,"comment":"2018"
+                            ,"status":""
+                        },{
+                            "name":"Horal Mega Blend"
+                            ,"size":"750ml"
+                            ,"comment":"2017"
                             ,"status":""
                         },{
                             "name":"Oude Gueuze"
                             ,"size":"375ml"
-                            ,"comment":""
-                            ,"status":"soldout"
-                        },{
-                            "name":"Oude Kriek"
-                            ,"size":"750ml"
-                            ,"comment":""
+                            ,"comment":"2018"
                             ,"status":""
                         },{
                             "name":"Oude Kriek"
                             ,"size":"375ml"
-                            ,"comment":""
-                            ,"status":"soldout"
-                        },{
-                            "name":"Schaarbeekse Kriek"
-                            ,"size":"750ml"
-                            ,"comment":""
-                            ,"status":"soldout"
-                        },{
-                            "name":"Schaarbeekse Kriek"
-                            ,"size":"375ml"
-                            ,"comment":""
-                            ,"status":"soldout"
+                            ,"comment":"2018"
+                            ,"status":""
                         },{
                             "name":"Oudbeitje"
                             ,"size":"375ml"
-                            ,"comment":""
+                            ,"comment":"2017 / 2018"
                             ,"status":""
                         },{
                             "name":"Framboos"
                             ,"size":"375ml"
-                            ,"comment":""
+                            ,"comment":"2017 / 2018"
                             ,"status":""
                         },{
                             "name":"Casssis"
                             ,"size":"375ml"
-                            ,"comment":""
+                            ,"comment":"2017 / 2018"
                             ,"status":""
                         },{
-                            "name":"Mega Blend 2017"
-                            ,"size":"750ml"
-                            ,"comment":""
+                            "name":"Schaarbeekse Kriek"
+                            ,"size":"375ml"
+                            ,"comment":"2018"
                             ,"status":""
                         }
                     ]
@@ -373,41 +373,34 @@
             "name":"Beer"
             ,"breweries":[
                 {
-                    "name":"Firestone Walker"
-                    ,"cans":[{
-                        "name":"Lager"
+                    "name":"Belgoo"
+                    ,"cans":[]
+                    ,"bottles":[{
+                        "name":"Luppoo"
+                        ,"size":"350ml"
+                        ,"comment":""
+                        ,"status":""
+                    },{
+                        "name":"Luppoo Extra"
+                        ,"size":"350ml"
+                        ,"comment":""
+                        ,"status":""
+                    },{
+                        "name":"Saisonneke Extra"
+                        ,"size":"350ml"
+                        ,"comment":""
+                        ,"status":""
+                    },{
+                        "name":"Magus"
+                        ,"size":"350ml"
+                        ,"comment":""
+                        ,"status":""
+                    },{
+                        "name":"Blond"
                         ,"size":"350ml"
                         ,"comment":""
                         ,"status":""
                     }]
-                    ,"bottles":[]
-                },{
-                    "name":"Oskar Blues"
-                    ,"cans":[{
-                        "name":"Ten FIDY - BBA"
-                        ,"size":"500ml"
-                        ,"comment":""
-                        ,"status":""
-                    }]
-                    ,"bottles":[]
-                },{
-                    "name":"Perrin Brewing"
-                    ,"cans":[{
-                        "name":"Perrin Black Ale"
-                        ,"size":"350ml"
-                        ,"comment":""
-                        ,"status":""
-                    }]
-                    ,"bottles":[]
-                },{
-                    "name":"SCB"
-                    ,"cans":[{
-                        "name":"Hop Rising DIPA"
-                        ,"size":"350ml"
-                        ,"comment":""
-                        ,"status":""
-                    }]
-                    ,"bottles":[]
                 }
             ]
         }
