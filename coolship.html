@@ -136,7 +136,7 @@
                     </section>
                     <section id="menu" class="post">
                         <header class="major">
-                            <h1 style="color:#e9ecef;">Bottle List</h1>
+                            <h1 style="color:#e9ecef;">Menu</h1>
                             <span class="date">{{menu.updated}}</span>
                         </header>
                         <div class="cards" v-for="item in menu.types">
@@ -144,7 +144,12 @@
                             <section class="card" v-for="brewery in item.breweries">
                                 <h3><a class="more" v-on:click="fn_toggle(brewery)"><i class="fa" v-bind:class="brewery.isOpen?'fa-angle-down':'fa-angle-right'"></i>{{brewery.name}}</a></h3>
                                 <ul v-show="brewery.isOpen">
-                                    <li v-for="bottle in brewery.bottles" v-bind:class="bottle.status">{{bottle.name}}  <p class="txtright">{{bottle.comment}}<i class="fas fa-wine-bottle"></i>{{bottle.size}}</p></li>
+                                    <li v-for="bottle in brewery.bottles" v-bind:class="bottle.status">
+                                        <span>{{bottle.name}}</span>
+                                        <p class="txtright">
+                                            <span>{{bottle.comment}}<i class="fas fa-wine-bottle"></i>{{bottle.size}}</span>
+                                        </p>
+                                    </li>
                                     <li v-for="can in brewery.cans" v-bind:class="can.status">{{can.name}}  <p class="txtright">{{can.comment}}<i class="fas fa-beer"></i>{{can.size}}</p></li>
                                 </ul>
                             </section>

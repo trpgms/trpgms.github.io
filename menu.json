@@ -267,6 +267,52 @@
                         }
                     ]
                 },{
+                    "name":"Lucy Margaux (Adelaide Hills of South Australia)"
+                    ,"cans":[]
+                    ,"bottles":[
+                        {
+                            "name":"3 Colours Red "
+                            ,"size":"750ml"
+                            ,"comment":"2018"
+                            ,"status":"soldout"
+                        },{
+                            "name":"Cabernet Franc "
+                            ,"size":"750ml"
+                            ,"comment":"2018"
+                            ,"status":""
+                        },{
+                            "name":"Chardonnay"
+                            ,"size":"750ml"
+                            ,"comment":"2018"
+                            ,"status":""
+                        },{
+                            "name":"Cliquante Nuance de Gris"
+                            ,"size":"750ml"
+                            ,"comment":"2018"
+                            ,"status":""
+                        },{
+                            "name":"Gris de Florette"
+                            ,"size":"750ml"
+                            ,"comment":"2018"
+                            ,"status":""
+                        },{
+                            "name":"Noir de Florette"
+                            ,"size":"750ml"
+                            ,"comment":"2018"
+                            ,"status":""
+                        },{
+                            "name":"Sauvignon Blanc"
+                            ,"size":"750ml"
+                            ,"comment":"2018"
+                            ,"status":""
+                        },{
+                            "name":"Summer of Love"
+                            ,"size":"750ml"
+                            ,"comment":"2018"
+                            ,"status":"soldout"
+                        }
+                    ]
+                },{
                     "name":"Vallone di Cecione (Toscana,Chianti)"
                     ,"cans":[]
                     ,"bottles":[
