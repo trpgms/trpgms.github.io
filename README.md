@@ -4,4 +4,4 @@
 
 ## 술
 
-- lambic [trpgms.github.io/posts/lambic.md]
+- [lambic](//trpgms.github.io/posts/lambic.md)
