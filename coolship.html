@@ -187,14 +187,7 @@
                 }
             });
             app.$nextTick(function () {
-                axios.get('menu.json').then(function (response) {
-                    app.menu = response.data;
-                    for(var t = 0 ; t < app.menu.types.length ; t++) {
-                        for(var b = 0 ; b < app.menu.types[t].breweries.length ; b++) {
-                            app.menu.types[t].breweries[b].isOpen = false;
-                        }
-                    }
-                });
+                
             });
         /*]]>*/
         </script>
