@@ -1,40 +1,47 @@
-{
-    "title": "먹거리정리",
-    "places": [
-        {
-            "name": "표주",
-            "tag": ["한식주점","서비스굿","맛집","신당"],
-            "address":"서울 중구 다산로42길 43-6 1층",
-            "instagram":"https://www.instagram.com/pyozu_/",
-            "visited":true
-        },
-        {
-            "name": "헤이웨이브",
-            "tag": ["크맥","서비스굿","맛집","신당"],
-            "address":"서울 중구 퇴계로87길 43-25",
-            "instagram":"https://www.instagram.com/heywave_sindang/",
-            "visited":true
-        },
-        {
-            "name": "텐진식당",
-            "tag": ["중식","서비스굿","맛집","신당"],
-            "address":"서울 중구 퇴계로87길 43-21",
-            "instagram":"https://www.instagram.com/tenjinkitchen/",
-            "visited":true
-        },
-        {
-            "name": "하오카오스탠",
-            "tag": ["직접숯불","꼬치","신당"],
-            "address":"서울 중구 퇴계로81길 7-12",
-            "instagram":"https://www.instagram.com/haokaostan.official/",
-            "visited":false
-        },
-        {
-            "name": "선민",
-            "tag": ["탄탄멘","우육면","홍콩식","신당"],
-            "address":"서울 중구 퇴계로 427-5 1층",
-            "instagram":"https://www.instagram.com/seonmin_sindang/",
-            "visited":false
-        }
-    ]
-}
+[
+    {
+        "name": "표주",
+        "tags": ["한식주점","서비스굿","맛집","신당"],
+        "address":"서울 중구 다산로42길 43-6 1층",
+        "instagram":"https://www.instagram.com/pyozu_/",
+        "time":"월~금 11:30~24:00 (15:00~17:30브레이크타임) 토요일 16:30~23:30",
+        "visited":true
+    },
+    {
+        "name": "헤이웨이브",
+        "tags": ["크맥","서비스굿","맛집","신당"],
+        "address":"서울 중구 퇴계로87길 43-25",
+        "instagram":"https://www.instagram.com/heywave_sindang/",
+        "visited":true
+    },
+    {
+        "name": "텐진식당",
+        "tags": ["중식","서비스굿","맛집","신당"],
+        "address":"서울 중구 퇴계로87길 43-21",
+        "instagram":"https://www.instagram.com/tenjinkitchen/",
+        "visited":true
+    },
+    {
+        "name": "하오카오스탠",
+        "tags": ["직접숯불","꼬치","신당"],
+        "address":"서울 중구 퇴계로81길 7-12",
+        "instagram":"https://www.instagram.com/haokaostan.official/",
+        "visited":false
+    },
+    {
+        "name": "바액트",
+        "tags": ["바","칵테일","신당"],
+        "address":"서울 중구 신당동 120-9 3층",
+        "instagram":"https://www.instagram.com/bar_a.c.t/",
+        "time":"오후 7시 - 오전 2시",
+        "lastorder":"오전 1시 30분",
+        "visited":false
+    },
+    {
+        "name": "선민",
+        "tags": ["탄탄멘","우육면","홍콩식","신당"],
+        "address":"서울 중구 퇴계로 427-5 1층",
+        "instagram":"https://www.instagram.com/seonmin_sindang/",
+        "visited":false
+    }
+]
