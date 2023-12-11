@@ -76,6 +76,7 @@
 			const app = Vue.createApp({
 				data() {
 					return {
+						origin:[],
 						list:[],
 						searchtext: '',
 						tags:[]
@@ -86,19 +87,49 @@
 						this.tags.push(this.searchtext);
 						this.tags = _.uniqBy(this.tags);
 						this.searchtext = '';
+						this.fn_search();
 					},
 					fn_remove: function (tag) {						
 						this.tags = _.pull(this.tags, tag);
+						this.fn_search();
 					},
 					fn_filter: function (tag) {
 						this.tags.push(tag);
 						this.tags = _.uniqBy(this.tags);
+						this.fn_search();
+					},
+					fn_search:function () {
+						if(this.tags.length == 0) {
+							this.list = this.origin;
+						} else {
+							let self = this;
+							this.list = [];
+							_.forEach(this.origin, function (item) {
+								// tag
+								let isMatch = true;
+								_.forEach(self.tags, function (tag) {
+									if(!_.includes(item.tags, tag)) {
+										isMatch = false;
+									}
+								});
+								// name
+								_.forEach(self.tags, function (tag) {
+									if(_.includes(item.name, tag)) {
+										isMatch = true;
+									}
+								});
+
+								if(isMatch) {
+									self.list.push(item);
+								}
+							});
+						} 						
 					}
 				},
-				mounted() {
-					this.list = axios.get('../data/fav.json').then(res => {
-						this.list = res.data;
-					});
+				async mounted()  {
+					let a = await axios.get('../data/fav.json');
+					this.origin = a.data;
+					this.fn_search();
 				}
 			}).mount('#wrap');
 		</script>
