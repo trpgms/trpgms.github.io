@@ -1,0 +1,40 @@
+{
+    "title": "먹거리정리",
+    "places": [
+        {
+            "name": "표주",
+            "tag": ["한식주점","서비스굿","맛집","신당"],
+            "address":"서울 중구 다산로42길 43-6 1층",
+            "instagram":"https://www.instagram.com/pyozu_/",
+            "visited":true
+        },
+        {
+            "name": "헤이웨이브",
+            "tag": ["크맥","서비스굿","맛집","신당"],
+            "address":"서울 중구 퇴계로87길 43-25",
+            "instagram":"https://www.instagram.com/heywave_sindang/",
+            "visited":true
+        },
+        {
+            "name": "텐진식당",
+            "tag": ["중식","서비스굿","맛집","신당"],
+            "address":"서울 중구 퇴계로87길 43-21",
+            "instagram":"https://www.instagram.com/tenjinkitchen/",
+            "visited":true
+        },
+        {
+            "name": "하오카오스탠",
+            "tag": ["직접숯불","꼬치","신당"],
+            "address":"서울 중구 퇴계로81길 7-12",
+            "instagram":"https://www.instagram.com/haokaostan.official/",
+            "visited":false
+        },
+        {
+            "name": "선민",
+            "tag": ["탄탄멘","우육면","홍콩식","신당"],
+            "address":"서울 중구 퇴계로 427-5 1층",
+            "instagram":"https://www.instagram.com/seonmin_sindang/",
+            "visited":false
+        }
+    ]
+}
