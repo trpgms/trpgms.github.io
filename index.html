@@ -1,140 +1,483 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>hit the spot</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>체중 변화 대시보드</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --surface-2: #243044;
+      --text: #e7ecf3;
+      --text-muted: #8b9cb3;
+      --accent: #3b82f6;
+      --border: #2d3a4f;
+      --success: #22c55e;
+      --danger: #ef4444;
+    }
 
-		<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/skeleton-css@2.0.4/css/normalize.min.css">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/getskeleton@2.0.4-2/lib/css/skeleton.min.css">
+    body {
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
 
-		<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js"></script>
-		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/axios@1.6.2/dist/axios.min.js"></script>
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 3rem;
+    }
 
-		<style>
-			iframe {width:100%;border:none;}
-			ul {list-style: none;}
-			.txtspace { display: inline-block; margin: 0 0 0 1.5em; }
-			.txtspace2 { display: inline-block; margin: 0 0 0 0.5em; }
-		</style>
-	</head>
-	<body>
-		<div class="section hero">
-			<div class="container">
-			  <div class="row">
-				<div class="one-half column">
-				  <h4 class="hero-heading">HIT THE SPOT</h4>
-				</div>				
-			  </div>
-			</div>
-		</div>
+    header {
+      margin-bottom: 2rem;
+    }
 
-		<div class="section">
-			<div id="wrap" class="container">
-				<div class="section">
-					<div class="row">
-							<div class="one column">
-								<label for="searchword">filter</label>
-							</div>
-							<div class="eight columns">
-								<input class="u-full-width" type="text" placeholder="type enter" id="searchword" v-model="searchtext" @keyup.enter="fn_add()">
-							</div>
-							<div class="two columns">
-								<a class="button" href="javascript:void(0)" @click="fn_add()">add filter</a>
-							</div>
-					</div>
-					<div class="row">
-						<div class="twelve columns">
-							<a v-for="(tag,idx) in tags" class="button" style="margin-right: 0.5em;" @click="fn_remove(tag)">{{tag}}</a>
-						</div>
-					</div>
-				</div>
-				<hr/>
-				<div class="section">
-					<ul>
-						<li class="card"  v-for="item in list">
-							<div class="row">
-								<strong>{{item.name}} </strong>
-								<a class="txtspace" :href="item.instagram" title="go to instagram" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><linearGradient id="a" x1="-37.094" x2="-26.555" y1="-72.719" y2="-84.047" gradientTransform="matrix(0 -1.982 -1.8439 0 -132.522 -51.077)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fd5"/><stop offset=".5" stop-color="#ff543e"/><stop offset="1" stop-color="#c837ab"/></linearGradient><path fill="url(#a)" d="M1.5 1.633C-.386 3.592 0 5.673 0 11.995c0 6.336-.158 7.499.602 9.075a5.056 5.056 0 0 0 3.276 2.677c1.144.294 1.904.253 8.1.253 5.194 0 6.81.093 8.157-.255 1.996-.515 3.62-2.134 3.842-4.957.031-.394.031-13.185-.001-13.587C23.74 2.194 21.889.461 19.45.11c-.56-.081-.672-.105-3.54-.11C5.737.005 3.507-.448 1.5 1.633z"/><path fill="#fff" d="M11.998 3.139c-3.631 0-7.079-.323-8.396 3.057-.544 1.396-.465 3.209-.465 5.805 0 2.278-.073 4.419.465 5.804 1.314 3.382 4.79 3.058 8.394 3.058 3.477 0 7.062.362 8.395-3.058.545-1.41.465-3.196.465-5.804 0-3.462.191-5.697-1.488-7.375-1.7-1.7-3.999-1.487-7.374-1.487zm-.794 1.597c4.346-.007 7.811-.607 8.006 3.683.072 1.589.072 5.571 0 7.16-.189 4.137-3.339 3.683-7.211 3.683-3.412 0-5.104.121-6.244-1.02-1.157-1.157-1.019-2.811-1.019-6.245 0-4.071-.385-7.026 3.683-7.213.817-.037 1.134-.048 2.785-.05zm5.524 1.471a1.063 1.063 0 1 0 0 2.126 1.063 1.063 0 0 0 0-2.126zm-4.73 1.243a4.55 4.55 0 1 0 .001 9.101 4.55 4.55 0 0 0-.001-9.101zm0 1.597a2.954 2.954 0 1 1-.001 5.907 2.954 2.954 0 0 1 .001-5.907z"/></svg></a>
-								<a class="txtspace2" :href="'https://map.naver.com/p/search/'+item.address" title="go to naver map" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="#607d8b" d="M1 24a.999.999 0 0 1-.707-1.707l10.55-10.55a.999.999 0 1 1 1.414 1.414l-10.55 10.55A.997.997 0 0 1 1 24z"/><circle cx="16.25" cy="7.75" r="7.75" fill="#4caf50"/><path fill="#fff" d="M12.25 8.5a.75.75 0 0 1-.75-.75A4.756 4.756 0 0 1 16.25 3a.75.75 0 0 1 0 1.5A3.254 3.254 0 0 0 13 7.75a.75.75 0 0 1-.75.75z"/></svg></a>
-							</div>
-							<div class="row">
-								<a class="button" style="margin-right: 0.5em;" v-for="tag in item.tags" @click="fn_filter(tag)">{{tag}}</a>
-							</div>
-							<ul >
-								<li>{{item.address}}</li>
-							</ul>
-							
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
 
-		<script type="text/javascript">
-			const app = Vue.createApp({
-				data() {
-					return {
-						origin:[],
-						list:[],
-						searchtext: '',
-						tags:[]
-					}
-				},
-				methods: {
-					fn_add: function () {
-						this.tags.push(this.searchtext);
-						this.tags = _.uniqBy(this.tags);
-						this.searchtext = '';
-						this.fn_search();
-					},
-					fn_remove: function (tag) {						
-						this.tags = _.pull(this.tags, tag);
-						this.fn_search();
-					},
-					fn_filter: function (tag) {
-						this.tags.push(tag);
-						this.tags = _.uniqBy(this.tags);
-						this.fn_search();
-					},
-					fn_search:function () {
-						if(this.tags.length == 0) {
-							this.list = this.origin;
-						} else {
-							let self = this;
-							this.list = [];
-							_.forEach(this.origin, function (item) {
-								// tag
-								let isMatch = true;
-								_.forEach(self.tags, function (tag) {
-									if(!_.includes(item.tags, tag)) {
-										isMatch = false;
-									}
-								});
-								// name
-								_.forEach(self.tags, function (tag) {
-									if(_.includes(item.name, tag)) {
-										isMatch = true;
-									}
-								});
+    header p {
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+      font-size: 0.95rem;
+    }
 
-								if(isMatch) {
-									self.list.push(item);
-								}
-							});
-						} 						
-					}
-				},
-				async mounted()  {
-					let a = await axios.get('../data/fav.json');
-					this.origin = a.data;
-					this.fn_search();
-				}
-			}).mount('#wrap');
-		</script>
-	</body>
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .status .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-muted);
+    }
+
+    .status.loading .dot { background: #f59e0b; animation: pulse 1s infinite; }
+    .status.ok .dot { background: var(--success); }
+    .status.error .dot { background: var(--danger); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+    }
+
+    .card .name {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .card .value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .card .meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .card .meta .up { color: var(--danger); }
+    .card .meta .down { color: var(--success); }
+
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tab {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.55rem 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.15s;
+    }
+
+    .tab:hover { border-color: var(--accent); color: var(--text); }
+    .tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .chart-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-panel h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-muted);
+    }
+
+    .chart-wrap {
+      position: relative;
+      height: 380px;
+    }
+
+    .error-box {
+      background: #3b1219;
+      border: 1px solid #7f1d1d;
+      color: #fecaca;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>체중 변화 대시보드</h1>
+      <p>구글 스프레드시트 데이터를 기반으로 일자별 체중 추이와 변화량을 표시합니다.<a href="https://docs.google.com/spreadsheets/d/1PDth8cB1phVHsUQ-tkY7gntvB-xz91gANp3VibMPxLM/edit?usp=sharing" target="_blank" rel="noopener">입력</a></p>
+      <div id="status" class="status loading">
+        <span class="dot"></span>
+        <span id="statusText">데이터 불러오는 중…</span>
+      </div>
+    </header>
+
+    <div id="errorBox" class="error-box"></div>
+    <div id="cards" class="cards"></div>
+
+    <div class="tabs">
+      <button class="tab active" data-chart="trend">체중 추이</button>
+      <button class="tab" data-chart="change">일별 변화량</button>
+    </div>
+
+    <div class="chart-panel">
+      <h2 id="chartTitle">일자별 체중 추이 (kg)</h2>
+      <div class="chart-wrap">
+        <canvas id="mainChart"></canvas>
+      </div>
+    </div>
+
+    <footer>
+      데이터 출처:
+      <a href="https://docs.google.com/spreadsheets/d/1PDth8cB1phVHsUQ-tkY7gntvB-xz91gANp3VibMPxLM/edit?usp=sharing" target="_blank" rel="noopener">Google 스프레드시트</a>
+    </footer>
+  </div>
+
+  <script>
+    const SPREADSHEET_ID = '1PDth8cB1phVHsUQ-tkY7gntvB-xz91gANp3VibMPxLM';
+    const COLORS = ['#3b82f6', '#f59e0b', '#22c55e', '#ec4899', '#a78bfa', '#14b8a6'];
+
+    let chartInstance = null;
+    let parsedData = null;
+    let activeChart = 'trend';
+
+    function setStatus(state, text) {
+      const el = document.getElementById('status');
+      el.className = `status ${state}`;
+      document.getElementById('statusText').textContent = text;
+    }
+
+    function showError(msg) {
+      const box = document.getElementById('errorBox');
+      box.textContent = msg;
+      box.style.display = 'block';
+      setStatus('error', '데이터 로드 실패');
+    }
+
+    function computeDailyChanges(data) {
+      const changes = {};
+      for (const [name, points] of Object.entries(data.series)) {
+        changes[name] = [];
+        for (let i = 1; i < points.length; i++) {
+          changes[name].push({
+            date: points[i].date,
+            value: +(points[i].value - points[i - 1].value).toFixed(1),
+          });
+        }
+      }
+      return changes;
+    }
+
+    function renderCards(data) {
+      const container = document.getElementById('cards');
+      container.innerHTML = '';
+
+      for (const name of data.people) {
+        const points = data.series[name];
+        if (points.length === 0) continue;
+
+        const latest = points[points.length - 1];
+        const first = points[0];
+        const totalChange = +(latest.value - first.value).toFixed(1);
+        const target = data.targets[name];
+        const toGoal = target != null ? +(latest.value - target).toFixed(1) : null;
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="name">${name}</div>
+          <div class="value">${latest.value} kg</div>
+          <div class="meta">
+            ${latest.date} 기준 ·
+            시작 대비 <span class="${totalChange > 0 ? 'up' : 'down'}">${totalChange > 0 ? '+' : ''}${totalChange} kg</span>
+            ${toGoal != null ? ` · 목표까지 ${toGoal > 0 ? '+' : ''}${toGoal} kg` : ''}
+          </div>
+        `;
+        container.appendChild(card);
+      }
+    }
+
+    function buildTrendDatasets(data) {
+      const datasets = [];
+      let colorIdx = 0;
+
+      for (const name of data.people) {
+        const points = data.series[name];
+        if (points.length === 0) continue;
+
+        const color = COLORS[colorIdx++ % COLORS.length];
+        datasets.push({
+          label: name,
+          data: points.map(p => ({ x: p.date, y: p.value })),
+          borderColor: color,
+          backgroundColor: color + '33',
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          tension: 0.25,
+          spanGaps: false,
+        });
+
+        const target = data.targets[name];
+        if (target != null) {
+          datasets.push({
+            label: `${name} 목표`,
+            data: points.map(p => ({ x: p.date, y: target })),
+            borderColor: color,
+            borderDash: [6, 4],
+            borderWidth: 1.5,
+            pointRadius: 0,
+            fill: false,
+            tension: 0,
+          });
+        }
+      }
+      return datasets;
+    }
+
+    function buildChangeDatasets(data) {
+      const changes = computeDailyChanges(data);
+      const datasets = [];
+      let colorIdx = 0;
+
+      for (const name of data.people) {
+        const points = changes[name];
+        if (!points || points.length === 0) continue;
+
+        const color = COLORS[colorIdx++ % COLORS.length];
+        datasets.push({
+          label: name,
+          data: points.map(p => ({ x: p.date, y: p.value })),
+          backgroundColor: points.map(p => p.value >= 0 ? '#ef444488' : '#22c55e88'),
+          borderColor: points.map(p => p.value >= 0 ? '#ef4444' : '#22c55e'),
+          borderWidth: 1,
+          type: 'bar',
+        });
+      }
+      return datasets;
+    }
+
+    function renderChart() {
+      const ctx = document.getElementById('mainChart').getContext('2d');
+      const isTrend = activeChart === 'trend';
+
+      document.getElementById('chartTitle').textContent = isTrend
+        ? '일자별 체중 추이 (kg)'
+        : '일별 체중 변화량 (kg, 전일 대비)';
+
+      if (chartInstance) chartInstance.destroy();
+
+      const datasets = isTrend
+        ? buildTrendDatasets(parsedData)
+        : buildChangeDatasets(parsedData);
+
+      chartInstance = new Chart(ctx, {
+        type: isTrend ? 'line' : 'bar',
+        data: { datasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: {
+              labels: { color: '#8b9cb3', usePointStyle: true, padding: 16 },
+            },
+            tooltip: {
+              callbacks: {
+                label(ctx) {
+                  const v = ctx.parsed.y;
+                  const sign = v > 0 ? '+' : '';
+                  return isTrend
+                    ? `${ctx.dataset.label}: ${v} kg`
+                    : `${ctx.dataset.label}: ${sign}${v} kg`;
+                },
+              },
+            },
+          },
+          scales: {
+            x: {
+              type: 'time',
+              time: { unit: 'day', tooltipFormat: 'yyyy-MM-dd', displayFormats: { day: 'M/d' } },
+              grid: { color: '#2d3a4f' },
+              ticks: { color: '#8b9cb3' },
+            },
+            y: {
+              grid: { color: '#2d3a4f' },
+              ticks: {
+                color: '#8b9cb3',
+                callback: v => (isTrend ? `${v} kg` : `${v > 0 ? '+' : ''}${v}`),
+              },
+              ...(isTrend ? {} : {
+                title: { display: true, text: '전일 대비 변화', color: '#8b9cb3' },
+              }),
+            },
+          },
+        },
+      });
+    }
+
+    function fetchSheetJsonp() {
+      return new Promise((resolve, reject) => {
+        const callbackName = `_gviz_${Date.now()}`;
+        const script = document.createElement('script');
+        const cleanup = () => {
+          delete window[callbackName];
+          script.remove();
+        };
+
+        window[callbackName] = (response) => {
+          cleanup();
+          if (response.status === 'ok') resolve(response);
+          else reject(new Error(response.errors?.[0]?.detailed_message || '시트 조회 실패'));
+        };
+
+        script.src = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json;responseHandler:${callbackName}`;
+        script.onerror = () => {
+          cleanup();
+          reject(new Error('네트워크 오류'));
+        };
+        document.head.appendChild(script);
+      });
+    }
+
+    function parseGvizTable(table) {
+      const cols = table.cols;
+      const people = cols
+        .map((col, i) => ({ index: i, label: col.label || `열 ${i}`, type: col.type }))
+        .filter((col, i) => i > 0 && col.label);
+
+      const targetRow = table.rows[0];
+      const targets = {};
+      people.forEach(p => {
+        const cell = targetRow?.c[p.index];
+        if (cell?.v != null) targets[p.label] = cell.v;
+      });
+
+      const series = {};
+      people.forEach(p => { series[p.label] = []; });
+
+      for (let r = 1; r < table.rows.length; r++) {
+        const row = table.rows[r];
+        const dateCell = row.c[0];
+        if (!dateCell?.f) continue;
+
+        const date = dateCell.f;
+        people.forEach(p => {
+          const cell = row.c[p.index];
+          const value = cell?.v;
+          if (value != null && typeof value === 'number') {
+            series[p.label].push({ date, value });
+          }
+        });
+      }
+
+      return { people: people.map(p => p.label), series, targets };
+    }
+
+    async function loadData() {
+      try {
+        const response = await fetchSheetJsonp();
+        parsedData = parseGvizTable(response.table);
+
+        const hasData = Object.values(parsedData.series).some(s => s.length > 0);
+        if (!hasData) {
+          showError('스프레드시트에 체중 기록이 없습니다. 데이터를 입력한 뒤 다시 시도해 주세요.');
+          return;
+        }
+
+        renderCards(parsedData);
+        renderChart();
+        setStatus('ok', `마지막 갱신: ${new Date().toLocaleString('ko-KR')}`);
+      } catch (err) {
+        showError(`데이터를 불러오지 못했습니다: ${err.message}`);
+      }
+    }
+
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeChart = btn.dataset.chart;
+        if (parsedData) renderChart();
+      });
+    });
+
+    loadData();
+  </script>
+</body>
 </html>
