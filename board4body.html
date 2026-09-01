@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>체중 변화 대시보드</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --surface-2: #243044;
+      --text: #e7ecf3;
+      --text-muted: #8b9cb3;
+      --accent: #3b82f6;
+      --border: #2d3a4f;
+      --success: #22c55e;
+      --danger: #ef4444;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 3rem;
+    }
+
+    header {
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+      font-size: 0.95rem;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .status .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-muted);
+    }
+
+    .status.loading .dot { background: #f59e0b; animation: pulse 1s infinite; }
+    .status.ok .dot { background: var(--success); }
+    .status.error .dot { background: var(--danger); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+    }
+
+    .card .name {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .card .value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .card .meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .card .meta .up { color: var(--danger); }
+    .card .meta .down { color: var(--success); }
+
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tab {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.55rem 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.15s;
+    }
+
+    .tab:hover { border-color: var(--accent); color: var(--text); }
+    .tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .chart-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-panel h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-muted);
+    }
+
+    .chart-wrap {
+      position: relative;
+      height: 380px;
+    }
+
+    .error-box {
+      background: #3b1219;
+      border: 1px solid #7f1d1d;
+      color: #fecaca;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>체중 변화 대시보드</h1>
+      <p>구글 스프레드시트 데이터를 기반으로 일자별 체중 추이와 변화량을 표시합니다.</p>
+      <div id="status" class="status loading">
+        <span class="dot"></span>
+        <span id="statusText">데이터 불러오는 중…</span>
+      </div>
+    </header>
+
+    <div id="errorBox" class="error-box"></div>
+    <div id="cards" class="cards"></div>
+
+    <div class="tabs">
+      <button class="tab active" data-chart="trend">체중 추이</button>
+      <button class="tab" data-chart="change">일별 변화량</button>
+    </div>
+
+    <div class="chart-panel">
+      <h2 id="chartTitle">일자별 체중 추이 (kg)</h2>
+      <div class="chart-wrap">
+        <canvas id="mainChart"></canvas>
+      </div>
+    </div>
+
+    <footer>
+      데이터 출처:
+      <a href="https://docs.google.com/spreadsheets/d/1PDth8cB1phVHsUQ-tkY7gntvB-xz91gANp3VibMPxLM/edit?usp=sharing" target="_blank" rel="noopener">Google 스프레드시트</a>
+    </footer>
+  </div>
+
+  <script>
+    const SPREADSHEET_ID = '1PDth8cB1phVHsUQ-tkY7gntvB-xz91gANp3VibMPxLM';
+    const COLORS = ['#3b82f6', '#f59e0b', '#22c55e', '#ec4899', '#a78bfa', '#14b8a6'];
+
+    let chartInstance = null;
+    let parsedData = null;
+    let activeChart = 'trend';
+
+    function setStatus(state, text) {
+      const el = document.getElementById('status');
+      el.className = `status ${state}`;
+      document.getElementById('statusText').textContent = text;
+    }
+
+    function showError(msg) {
+      const box = document.getElementById('errorBox');
+      box.textContent = msg;
+      box.style.display = 'block';
+      setStatus('error', '데이터 로드 실패');
+    }
+
+    function computeDailyChanges(data) {
+      const changes = {};
+      for (const [name, points] of Object.entries(data.series)) {
+        changes[name] = [];
+        for (let i = 1; i < points.length; i++) {
+          changes[name].push({
+            date: points[i].date,
+            value: +(points[i].value - points[i - 1].value).toFixed(1),
+          });
+        }
+      }
+      return changes;
+    }
+
+    function renderCards(data) {
+      const container = document.getElementById('cards');
+      container.innerHTML = '';
+
+      for (const name of data.people) {
+        const points = data.series[name];
+        if (points.length === 0) continue;
+
+        const latest = points[points.length - 1];
+        const first = points[0];
+        const totalChange = +(latest.value - first.value).toFixed(1);
+        const target = data.targets[name];
+        const toGoal = target != null ? +(latest.value - target).toFixed(1) : null;
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="name">${name}</div>
+          <div class="value">${latest.value} kg</div>
+          <div class="meta">
+            ${latest.date} 기준 ·
+            시작 대비 <span class="${totalChange > 0 ? 'up' : 'down'}">${totalChange > 0 ? '+' : ''}${totalChange} kg</span>
+            ${toGoal != null ? ` · 목표까지 ${toGoal > 0 ? '+' : ''}${toGoal} kg` : ''}
+          </div>
+        `;
+        container.appendChild(card);
+      }
+    }
+
+    function buildTrendDatasets(data) {
+      const datasets = [];
+      let colorIdx = 0;
+
+      for (const name of data.people) {
+        const points = data.series[name];
+        if (points.length === 0) continue;
+
+        const color = COLORS[colorIdx++ % COLORS.length];
+        datasets.push({
+          label: name,
+          data: points.map(p => ({ x: p.date, y: p.value })),
+          borderColor: color,
+          backgroundColor: color + '33',
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          tension: 0.25,
+          spanGaps: false,
+        });
+
+        const target = data.targets[name];
+        if (target != null) {
+          datasets.push({
+            label: `${name} 목표`,
+            data: points.map(p => ({ x: p.date, y: target })),
+            borderColor: color,
+            borderDash: [6, 4],
+            borderWidth: 1.5,
+            pointRadius: 0,
+            fill: false,
+            tension: 0,
+          });
+        }
+      }
+      return datasets;
+    }
+
+    function buildChangeDatasets(data) {
+      const changes = computeDailyChanges(data);
+      const datasets = [];
+      let colorIdx = 0;
+
+      for (const name of data.people) {
+        const points = changes[name];
+        if (!points || points.length === 0) continue;
+
+        const color = COLORS[colorIdx++ % COLORS.length];
+        datasets.push({
+          label: name,
+          data: points.map(p => ({ x: p.date, y: p.value })),
+          backgroundColor: points.map(p => p.value >= 0 ? '#ef444488' : '#22c55e88'),
+          borderColor: points.map(p => p.value >= 0 ? '#ef4444' : '#22c55e'),
+          borderWidth: 1,
+          type: 'bar',
+        });
+      }
+      return datasets;
+    }
+
+    function renderChart() {
+      const ctx = document.getElementById('mainChart').getContext('2d');
+      const isTrend = activeChart === 'trend';
+
+      document.getElementById('chartTitle').textContent = isTrend
+        ? '일자별 체중 추이 (kg)'
+        : '일별 체중 변화량 (kg, 전일 대비)';
+
+      if (chartInstance) chartInstance.destroy();
+
+      const datasets = isTrend
+        ? buildTrendDatasets(parsedData)
+        : buildChangeDatasets(parsedData);
+
+      chartInstance = new Chart(ctx, {
+        type: isTrend ? 'line' : 'bar',
+        data: { datasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: {
+              labels: { color: '#8b9cb3', usePointStyle: true, padding: 16 },
+            },
+            tooltip: {
+              callbacks: {
+                label(ctx) {
+                  const v = ctx.parsed.y;
+                  const sign = v > 0 ? '+' : '';
+                  return isTrend
+                    ? `${ctx.dataset.label}: ${v} kg`
+                    : `${ctx.dataset.label}: ${sign}${v} kg`;
+                },
+              },
+            },
+          },
+          scales: {
+            x: {
+              type: 'time',
+              time: { unit: 'day', tooltipFormat: 'yyyy-MM-dd', displayFormats: { day: 'M/d' } },
+              grid: { color: '#2d3a4f' },
+              ticks: { color: '#8b9cb3' },
+            },
+            y: {
+              grid: { color: '#2d3a4f' },
+              ticks: {
+                color: '#8b9cb3',
+                callback: v => (isTrend ? `${v} kg` : `${v > 0 ? '+' : ''}${v}`),
+              },
+              ...(isTrend ? {} : {
+                title: { display: true, text: '전일 대비 변화', color: '#8b9cb3' },
+              }),
+            },
+          },
+        },
+      });
+    }
+
+    function fetchSheetJsonp() {
+      return new Promise((resolve, reject) => {
+        const callbackName = `_gviz_${Date.now()}`;
+        const script = document.createElement('script');
+        const cleanup = () => {
+          delete window[callbackName];
+          script.remove();
+        };
+
+        window[callbackName] = (response) => {
+          cleanup();
+          if (response.status === 'ok') resolve(response);
+          else reject(new Error(response.errors?.[0]?.detailed_message || '시트 조회 실패'));
+        };
+
+        script.src = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json;responseHandler:${callbackName}`;
+        script.onerror = () => {
+          cleanup();
+          reject(new Error('네트워크 오류'));
+        };
+        document.head.appendChild(script);
+      });
+    }
+
+    function parseGvizTable(table) {
+      const cols = table.cols;
+      const people = cols
+        .map((col, i) => ({ index: i, label: col.label || `열 ${i}`, type: col.type }))
+        .filter((col, i) => i > 0 && col.label);
+
+      const targetRow = table.rows[0];
+      const targets = {};
+      people.forEach(p => {
+        const cell = targetRow?.c[p.index];
+        if (cell?.v != null) targets[p.label] = cell.v;
+      });
+
+      const series = {};
+      people.forEach(p => { series[p.label] = []; });
+
+      for (let r = 1; r < table.rows.length; r++) {
+        const row = table.rows[r];
+        const dateCell = row.c[0];
+        if (!dateCell?.f) continue;
+
+        const date = dateCell.f;
+        people.forEach(p => {
+          const cell = row.c[p.index];
+          const value = cell?.v;
+          if (value != null && typeof value === 'number') {
+            series[p.label].push({ date, value });
+          }
+        });
+      }
+
+      return { people: people.map(p => p.label), series, targets };
+    }
+
+    async function loadData() {
+      try {
+        const response = await fetchSheetJsonp();
+        parsedData = parseGvizTable(response.table);
+
+        const hasData = Object.values(parsedData.series).some(s => s.length > 0);
+        if (!hasData) {
+          showError('스프레드시트에 체중 기록이 없습니다. 데이터를 입력한 뒤 다시 시도해 주세요.');
+          return;
+        }
+
+        renderCards(parsedData);
+        renderChart();
+        setStatus('ok', `마지막 갱신: ${new Date().toLocaleString('ko-KR')}`);
+      } catch (err) {
+        showError(`데이터를 불러오지 못했습니다: ${err.message}`);
+      }
+    }
+
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeChart = btn.dataset.chart;
+        if (parsedData) renderChart();
+      });
+    });
+
+    loadData();
+  </script>
+</body>
+</html>
